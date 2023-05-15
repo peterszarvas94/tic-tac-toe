@@ -1,7 +1,11 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Indie_Flower } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const indie = Indie_Flower({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--indie'
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={indie.variable}>{children}</body>
     </html>
   )
 }
