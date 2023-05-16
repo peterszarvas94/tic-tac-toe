@@ -1,5 +1,6 @@
 "use client";
 
+import NextPlayer from "@/components/NextPlayer";
 import Reset from "@/components/Reset";
 import Table from "@/components/Table";
 import TableProvider from "@/components/TableContext";
@@ -24,6 +25,9 @@ export default function Home() {
           <div className="flex justify-center">
             <Reset rows={rows} cols={cols} />
           </div>
+          <div className="flex justify-center">
+            <NextPlayer />
+          </div>
         </div>
       </main>
     </TableProvider>
@@ -31,4 +35,3 @@ export default function Home() {
 }
 
 // login
-// grainy background

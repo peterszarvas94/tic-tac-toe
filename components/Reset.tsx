@@ -10,11 +10,12 @@ interface Props {
 }
 
 export default function Reset({ rows, cols }: Props) {
-  const { setTableState } = useContext(TableContext);
+  const { setTableState, setUser } = useContext(TableContext);
   return (
     <button className="text-2xl underline" onClick={() => {
       const def = defaultState(rows, cols);
       setTableState(def);
+      setUser("O");
     }}>
       Reset
     </button>

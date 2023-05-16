@@ -7,7 +7,7 @@ export default function TableProvider({ children }: { children: React.ReactNode 
   const [tableState, setTableState] = useState<TableState>({
     rows: [],
   });
-  const [user, setUser] = useState<User>("X");
+  const [user, setUser] = useState<User>("O");
 
   return (
     <TableContext.Provider value={{
