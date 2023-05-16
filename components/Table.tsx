@@ -1,39 +1,33 @@
-import { ReactElement } from "react";
+"use client";
+
+import { ReactElement, useContext, useEffect } from "react";
+import { TableContext } from "@/components/TableContext";
+import { defaultState } from "@/utils/defaultState";
+import TableRow from "@/components/TableRow";
 
 interface Props {
   cols: number;
   rows: number;
 }
 
-function renderTableCol(col: number, row: number) {
-  return (
-    <td className="border border-black w-10 h-10" data-col={col} data-row={row} />
-  );
-}
-
-function renderTableRow(row: number, cols: number) {
-  let tableCells: ReactElement[] = [];
-
-  for (let col = 0; col < cols; col++) {
-    tableCells.push(renderTableCol(col, row));
-  }
-
-  return (
-    <tr data-row={row}>
-      {tableCells}
-    </tr>
-  );
-}
-
 export default function Table({ cols, rows }: Props) {
-  let tableRows: ReactElement[] = [];
 
+  const { setTableState } = useContext(TableContext);
+
+  useEffect(() => {
+    const def = defaultState(rows, cols);
+    setTableState(def);
+  }, [rows, cols]);
+
+  let tableRows: ReactElement[] = [];
   for (let row = 0; row < rows; row++) {
-    tableRows.push(renderTableRow(row, cols));
+    let tableRow = <TableRow row={row} cols={cols} key={row} />;
+    tableRows.push(tableRow);
   }
 
   return (
-    <table>
+    <table className="border-2 border-primary">
+      <thead />
       <tbody>
         {tableRows}
       </tbody>

@@ -1,4 +1,5 @@
-import './globals.css'
+import './globals.css';
+
 import { Indie_Flower } from 'next/font/google'
 
 const indie = Indie_Flower({
