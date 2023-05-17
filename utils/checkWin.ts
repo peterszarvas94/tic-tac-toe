@@ -1,6 +1,6 @@
-import type { Cell, Row, WinStatus, TableState, User } from "@/utils/types";
+import type { Cell, Row, GameStatus, TableState, User, CheckStatus } from "@/utils/types";
 
-function checkDirection(direction: Row, user: User): WinStatus {
+function checkDirection(direction: Row, user: User): CheckStatus {
   const { cells } = direction;
   let winnerCells: Cell[] = [];
   for (let i = 0; i < cells.length; i++) {
@@ -13,15 +13,15 @@ function checkDirection(direction: Row, user: User): WinStatus {
       winnerCells.push(cell);
     }
     if (winnerCells.length === 5) {
-      return { won: true, winner: user, cells: winnerCells };
+      return { won: true, cells: winnerCells };
     }
   }
-  return { won: false, winner: null, cells: [] };
+  return { won: false };
 }
 
-export function checkWin(table: TableState, row: number, col: number, user: User): WinStatus {
+export function checkWin(table: TableState, row: number, col: number, user: User): GameStatus {
   if (!user) {
-    return { won: false, winner: null, cells: [] };
+    return { won: false };
   }
 
   // collect all cells in the same row
@@ -42,7 +42,8 @@ export function checkWin(table: TableState, row: number, col: number, user: User
 
   const checkVertical = checkDirection(vertical, user)
   if (checkVertical.won) {
-    return checkVertical;
+
+    return { won: true, winner: user, cells: checkVertical.cells, direction: 'vertical' };
   }
 
   // collect all cells in the same column
@@ -55,7 +56,7 @@ export function checkWin(table: TableState, row: number, col: number, user: User
   }
   const checkHorizontal = checkDirection(horizontal, user);
   if (checkHorizontal.won) {
-    return checkHorizontal;
+    return { won: true, winner: user, cells: checkHorizontal.cells, direction: 'horizontal' };
   }
 
   // collect all cells in the same diagonal, top-left to bottom-right
@@ -95,7 +96,7 @@ export function checkWin(table: TableState, row: number, col: number, user: User
   }
   const checkDiagonal1 = checkDirection(diagonal1, user);
   if (checkDiagonal1.won) {
-    return checkDiagonal1;
+    return { won: true, winner: user, cells: checkDiagonal1.cells, direction: 'diagonal1' };
   }
 
   // collect all cells in the same diagonal, top-right to bottom-left
@@ -134,8 +135,8 @@ export function checkWin(table: TableState, row: number, col: number, user: User
   }
   const checkDiagonal2 = checkDirection(diagonal2, user);
   if (checkDiagonal2.won) {
-    return checkDiagonal2;
+    return { won: true, winner: user, cells: checkDiagonal2.cells, direction: 'diagonal2' };
   }
 
-  return { won: false, winner: null, cells: [] };
+  return { won: false };
 }

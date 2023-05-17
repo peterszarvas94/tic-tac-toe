@@ -3,13 +3,12 @@
 import { useContext } from "react";
 import { TableContext } from "./TableContext";
 
-export default function NextPlayer() {
-
-  const { user } = useContext(TableContext);
+export default function Size() {
+  const { size, setSize, } = useContext(TableContext);
 
   return (
     <div>
-      <div> next player: {user} </div>
+
     </div>
-  )
+  );
 }

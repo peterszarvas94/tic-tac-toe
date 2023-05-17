@@ -10,14 +10,21 @@ interface Props {
 }
 
 export default function Reset({ rows, cols }: Props) {
-  const { setTableState, setUser } = useContext(TableContext);
+  const { setTableState, setUser, setWinStatus, winStatus, size } = useContext(TableContext);
   return (
-    <button className="text-2xl underline" onClick={() => {
-      const def = defaultState(rows, cols);
-      setTableState(def);
-      setUser("O");
-    }}>
-      Reset
-    </button>
+    <div>
+      <button
+        className="
+          text-2xl border-[1px] border-primary pt-2 pb-1 px-4 rounded-xl flex items-center bg-secondary
+        "
+        onClick={() => {
+          const def = defaultState(rows, cols);
+          setTableState(def);
+          setUser("O");
+          setWinStatus({ won: false });
+        }}>
+        {winStatus.won ? "Play again" : "Reset"}
+      </button>
+    </div>
   )
 }

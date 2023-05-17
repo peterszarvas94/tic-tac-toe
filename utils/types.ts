@@ -14,19 +14,22 @@ export type TableState = {
   rows: Row[];
 }
 
-export type WinStatus = {
+export type Direction = 'vertical' | 'horizontal' | 'diagonal1' | 'diagonal2';
+
+export type GameStatus = {
   won: true;
   winner: User;
   cells: Cell[];
+  direction: Direction;
 } | {
   won: false;
-  winner: null;
-  cells: Cell[];
 }
 
-export type TableContextType = {
-  tableState: TableState;
-  setTableState: (tableState: TableState) => void;
-  user: User;
-  setUser: (user: User) => void;
+export type CheckStatus = {
+  won: true;
+  cells: Cell[];
+} | {
+  won: false;
 }
+
+export type TableSize = 5 | 6 | 7 | 8 | 9 | 10;
