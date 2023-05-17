@@ -8,7 +8,7 @@ export default function Staus() {
   const { user, winStatus } = useContext(TableContext);
 
   return (
-    <div className="text-2xl py-5">
+    <div className="text-2xl">
       {winStatus.won ? (
         `${winStatus.winner} won!`
       ) : (
