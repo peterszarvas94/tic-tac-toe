@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AppContext } from "./AppContext";
+import { AppContext } from "@/components/AppContext";
 import { TableSize } from "@/utils/types";
 
 export default function Size() {
@@ -10,7 +10,7 @@ export default function Size() {
       <select
         value={input}
         onChange={(e) => setInput(parseInt(e.target.value) as TableSize)}
-        className="border border-primary rounded-xl p-1 bg-secondary text-primary text-2xl cursor-pointer"
+        className="border border-primary rounded-xl p-1 bg-secondary text-primary text-2xl cursor-pointer text-center"
       >
         <option value="5">5</option>
         <option value="6">6</option>

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { checkWin } from "@/utils/checkWin";
 import { AppContext } from "@/components/AppContext";
 import type { Cell, TableState } from "@/utils/types";
@@ -11,22 +11,35 @@ interface Props {
 export default function TableCell({ row, col }: Props) {
 
   const { tableState, setTableState, user, setUser, winStatus, setWinStatus } = useContext(AppContext);
+  const [hovered, setHovered] = useState(false);
 
-  let stateRows = tableState.rows;
-  let stateRow = stateRows[row];
-  if (!stateRow) return <td />;
+  const rowState = tableState.rows[row];
+  if (!rowState) return <td />;
 
-  let stateCell = stateRow.cells[col];
-  let state = stateCell.state ?? null
+  const cellState = rowState.cells[col];
+  const hoveredCell = hovered && !cellState.state && !winStatus.won;
+  const state = cellState.state ?? null;
 
-  const style =
+  const wonStyle =
     (winStatus.won && winStatus.cells.some(cell => cell.row === row && cell.col === col)) ?
       "bg-primary text-white" :
       "";
 
+  const hoverStyle =
+    (!winStatus.won && !state) ?
+      "hover:bg-accent hover:text-white" :
+      "";
+
   return (
     <td
-      className={`border border-black w-10 h-10 text-3xl text-center cursor-pointer ${style}`}
+      className={`border border-black w-10 h-10 text-3xl text-center cursor-pointer ${wonStyle} ${hoverStyle}`}
+
+      onMouseOver={() => {
+        setHovered(true);
+      }}
+      onMouseLeave={() => {
+        setHovered(false);
+      }}
       onClick={() => {
         if (state !== null) return;
         if (winStatus.won) return;
@@ -49,7 +62,7 @@ export default function TableCell({ row, col }: Props) {
         }
       }}
     >
-      {state ?? ""}
+      {hoveredCell ? user : state}
     </td>
   );
 }
