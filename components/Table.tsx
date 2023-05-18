@@ -1,12 +1,10 @@
-"use client";
-
 import { ReactElement, useContext, useEffect } from "react";
-import { TableContext } from "@/components/TableContext";
+import { AppContext } from "@/components/AppContext";
 import TableRow from "@/components/TableRow";
 
 export default function Table() {
 
-  const { size } = useContext(TableContext);
+  const { size } = useContext(AppContext);
 
   let tableRows: ReactElement[] = [];
   for (let row = 0; row < size; row++) {

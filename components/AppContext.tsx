@@ -2,7 +2,7 @@ import { defaultState } from '@/utils/defaultState';
 import type { TableState, User, GameStatus, TableSize } from '@/utils/types';
 import { createContext, useState } from 'react';
 
-type TableContextType = {
+type AppContextType = {
   tableState: TableState;
   setTableState: (tableState: TableState) => void;
   user: User;
@@ -13,11 +13,13 @@ type TableContextType = {
   setSize: (size: TableSize) => void;
   input: TableSize;
   setInput: (input: TableSize) => void;
+  loggedIn: boolean;
+  setLoggedIn: (loggedIn: boolean) => void;
 }
 
-export const TableContext = createContext<TableContextType>({} as TableContextType);
+export const AppContext = createContext<AppContextType>({} as AppContextType);
 
-export default function TableProvider({ children }: { children: React.ReactNode }) {
+export default function AppContextProvider({ children }: { children: React.ReactNode }) {
 
   const initialTableState = defaultState(10, 10);
 
@@ -26,9 +28,10 @@ export default function TableProvider({ children }: { children: React.ReactNode 
   const [winStatus, setWinStatus] = useState<GameStatus>({ won: false });
   const [size, setSize] = useState<TableSize>(10);
   const [input, setInput] = useState<TableSize>(10);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   return (
-    <TableContext.Provider value={{
+    <AppContext.Provider value={{
       tableState,
       setTableState,
 
@@ -43,9 +46,12 @@ export default function TableProvider({ children }: { children: React.ReactNode 
 
       input,
       setInput,
+
+      loggedIn,
+      setLoggedIn,
     }}>
       {children}
-    </TableContext.Provider>
+    </AppContext.Provider>
   )
 }
 

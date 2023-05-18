@@ -1,22 +1,23 @@
-"use client";
-
 import { useContext } from "react";
-import { TableContext } from "./TableContext";
+import { AppContext } from "./AppContext";
 import { TableSize } from "@/utils/types";
 
 export default function Size() {
-  const { input, setInput } = useContext(TableContext);
+  const { input, setInput } = useContext(AppContext);
 
   return (
     <div>
-      <input
-        type="number"
+      <select
         value={input}
-        min={5}
-        max={10}
-        className="border border-primary rounded-xl p-2 w-14 bg-secondary text-primary text-right text-xl"
         onChange={(e) => setInput(parseInt(e.target.value) as TableSize)}
-      />
+        className="border border-primary rounded-xl p-1 bg-secondary text-primary text-2xl cursor-pointer"
+      >
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
     </div>
   );
 }

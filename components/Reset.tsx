@@ -1,11 +1,9 @@
-"use client";
-
 import { useContext } from "react";
-import { TableContext } from "./TableContext";
+import { AppContext } from "./AppContext";
 import { defaultState } from "@/utils/defaultState";
 
 export default function Reset() {
-  const { setTableState, setUser, setWinStatus, winStatus, input, setSize } = useContext(TableContext);
+  const { setTableState, setUser, setWinStatus, winStatus, input, setSize } = useContext(AppContext);
   return (
     <div>
       <button

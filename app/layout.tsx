@@ -1,4 +1,6 @@
+import Image from 'next/image';
 import './globals.css';
+import Paper from "@/images/paper.jpg";
 
 import { Indie_Flower } from 'next/font/google'
 
@@ -20,7 +22,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={indie.variable}>{children}</body>
+      <body className={indie.variable}>
+        <main className="font-indie">
+          <Image src={Paper} alt="paper" width={Paper.width} height={Paper.height} className="
+        absolute left-0 top-0 h-screen w-full object-cover
+      " />
+          {children}
+        </main>
+      </body>
     </html>
   )
 }

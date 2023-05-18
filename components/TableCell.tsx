@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { checkWin } from "@/utils/checkWin";
-import { TableContext } from "@/components/TableContext";
+import { AppContext } from "@/components/AppContext";
 import type { Cell, TableState } from "@/utils/types";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 export default function TableCell({ row, col }: Props) {
 
-  const { tableState, setTableState, user, setUser, winStatus, setWinStatus } = useContext(TableContext);
+  const { tableState, setTableState, user, setUser, winStatus, setWinStatus } = useContext(AppContext);
 
   let stateRows = tableState.rows;
   let stateRow = stateRows[row];

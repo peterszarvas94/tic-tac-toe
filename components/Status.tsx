@@ -1,11 +1,9 @@
-"use client";
-
 import { useContext } from "react";
-import { TableContext } from "./TableContext";
+import { AppContext } from "./AppContext";
 
 export default function Staus() {
 
-  const { user, winStatus } = useContext(TableContext);
+  const { user, winStatus } = useContext(AppContext);
 
   return (
     <div className="text-2xl">
