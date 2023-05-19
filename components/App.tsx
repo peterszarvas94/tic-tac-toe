@@ -1,8 +1,8 @@
-import { AppContext } from "./AppContext";
 import { useContext } from "react";
-import Game from "./Game";
-import Login from "./Login";
-import SizeSelect from "./SizeSelect";
+import { AppContext } from "@/components/AppContext";
+import Game from "@/components/Game";
+import Login from "@/components/Login";
+import Options from "@/components/Options";
 
 export default function App() {
 
@@ -13,7 +13,7 @@ export default function App() {
   }
 
   if (game.status === "logged-in") {
-    return <SizeSelect />
+    return <Options />
   }
 
   return <Game />

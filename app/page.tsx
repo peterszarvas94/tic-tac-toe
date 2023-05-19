@@ -7,8 +7,8 @@ export default function Home() {
 
   return (
     <AppContextProvider>
-      <div className="absolute left-0 top-0 w-full flex flex-col gap-4 items-center">
-        <h1 className="text-4xl mx-auto w-fit py-10">Tic Tac Toe</h1>
+      <div className="absolute left-0 top-0 w-full text-black">
+        <h1 className="text-4xl mx-auto w-fit py-12">tic tac toe</h1>
         <App />
       </div>
     </AppContextProvider>

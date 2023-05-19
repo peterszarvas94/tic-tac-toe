@@ -1,6 +1,6 @@
-import { Cell, Row, TableState } from "@/utils/types";
+import type { Cell, Row, TableState } from "@/utils/types";
 
-export function defaultState(rows: number, cols: number) {
+export function generateEmptyState(rows: number, cols: number) {
   const state: TableState = {
     rows: []
   }

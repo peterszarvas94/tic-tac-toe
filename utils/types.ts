@@ -1,4 +1,6 @@
-export type User = "X" | "O";
+export type User = "O" | "X" | "=";
+
+export const UserList: User[] = ["O", "X", "="];
 
 export type Cell = {
   row: number;
@@ -13,17 +15,6 @@ export type Row = {
 export type TableState = {
   rows: Row[];
 }
-
-// export type Direction = 'vertical' | 'horizontal' | 'diagonal1' | 'diagonal2';
-
-// export type GameStatus = {
-//   won: true;
-//   winner: User;
-//   cells: Cell[];
-//   direction: Direction;
-// } | {
-//   won: false;
-// }
 
 export type GameStatus = {
   status: 'logged-out';
@@ -45,3 +36,4 @@ export type CheckStatus = {
 }
 
 export type TableSize = 5 | 6 | 7 | 8 | 9 | 10;
+export type PlayersSize = 2 | 3;

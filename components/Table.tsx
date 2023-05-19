@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useEffect } from "react";
+import { ReactElement, useContext } from "react";
 import { AppContext } from "@/components/AppContext";
 import TableRow from "@/components/TableRow";
 
@@ -13,7 +13,7 @@ export default function Table() {
   }
 
   return (
-    <table className="border-2 border-primary">
+    <table className="border-2 border-black">
       <thead />
       <tbody>
         {tableRows}

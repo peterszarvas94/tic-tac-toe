@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { AppContext } from "./AppContext";
 import { useForm } from "react-hook-form";
+import { AppContext } from "@/components/AppContext";
 
 type Form = {
   username: string;
@@ -32,17 +32,17 @@ export default function Login() {
         {...register("username", { required: true })}
         type="text"
         placeholder="admin"
-        className="bg-white py-2 px-4 border border-primary rounded-xl"
+        className="bg-white py-2 px-4 border border-primary rounded-xl placeholder-accent focus:outline-primary"
       />
       <input
         {...register("password", { required: true })}
         type="password"
         placeholder="admin"
-        className="bg-white py-2 px-4 border border-primary rounded-xl"
+        className="bg-white py-2 px-4 border border-primary rounded-xl placeholder-accent focus:outline-primary"
       />
       <button
         type="submit"
-        className="bg-secondary border border-primary rounded-xl py-2 px-4 w-fit text-xl"
+        className="bg-secondary border border-primary rounded-xl py-2 px-4 w-fit text-xl focus:outline-primary"
       >
         Login
       </button>

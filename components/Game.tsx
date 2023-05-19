@@ -2,33 +2,25 @@ import { useContext } from "react";
 import { AppContext } from "@/components/AppContext";
 import Table from "@/components/Table";
 import Status from "@/components/Status";
-import SizeSelect from "@/components/SizeSelect";
 
 export default function Game() {
 
-  const { game, setGame } = useContext(AppContext);
-
-  if (game.status === "logged-out") {
-    <SizeSelect />
-  }
+  const { setGame } = useContext(AppContext);
 
   return (
-    <>
+    <div className="w-fit mx-auto flex flex-col gap-8 items-center">
       <Table />
       <Status />
-      <div className="flex gap-2">
-
-        <button
-          className="
-          text-2xl border border-primary pt-2 pb-1 px-4 rounded-xl flex items-center bg-secondary
-        "
-          onClick={() => {
-            setGame({ status: "logged-in" });
-          }}
-        >
-          New game
-        </button>
-      </div>
-    </>
+      <button
+        className="
+            text-2xl border border-primary py-2 px-4 rounded-xl flex items-center bg-secondary w-fit
+          "
+        onClick={() => {
+          setGame({ status: "logged-in" });
+        }}
+      >
+        new game
+      </button>
+    </div>
   )
 }
