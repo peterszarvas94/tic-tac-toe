@@ -9,7 +9,7 @@ type Form = {
 
 export default function Login() {
 
-  const { setLoggedIn } = useContext(AppContext);
+  const { setGame } = useContext(AppContext);
   const { register, handleSubmit, formState: { errors }, setError } = useForm<Form>();
 
   function formSubmit(data: Form) {
@@ -19,7 +19,7 @@ export default function Login() {
       return;
     }
 
-    setLoggedIn(true);
+    setGame({ status: "logged-in" });
   }
 
   function clearError() {

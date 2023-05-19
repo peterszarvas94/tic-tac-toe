@@ -7,14 +7,10 @@ type AppContextType = {
   setTableState: (tableState: TableState) => void;
   user: User;
   setUser: (user: User) => void;
-  winStatus: GameStatus;
-  setWinStatus: (winStatus: GameStatus) => void;
+  game: GameStatus;
+  setGame: (game: GameStatus) => void;
   size: TableSize;
   setSize: (size: TableSize) => void;
-  input: TableSize;
-  setInput: (input: TableSize) => void;
-  loggedIn: boolean;
-  setLoggedIn: (loggedIn: boolean) => void;
 }
 
 export const AppContext = createContext<AppContextType>({} as AppContextType);
@@ -25,10 +21,8 @@ export default function AppContextProvider({ children }: { children: React.React
 
   const [tableState, setTableState] = useState<TableState>(initialTableState);
   const [user, setUser] = useState<User>("O");
-  const [winStatus, setWinStatus] = useState<GameStatus>({ won: false });
+  const [game, setGame] = useState<GameStatus>({ status: 'logged-out' });
   const [size, setSize] = useState<TableSize>(10);
-  const [input, setInput] = useState<TableSize>(10);
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   return (
     <AppContext.Provider value={{
@@ -38,17 +32,11 @@ export default function AppContextProvider({ children }: { children: React.React
       user,
       setUser,
 
-      winStatus,
-      setWinStatus,
+      game,
+      setGame,
 
       size,
       setSize,
-
-      input,
-      setInput,
-
-      loggedIn,
-      setLoggedIn,
     }}>
       {children}
     </AppContext.Provider>

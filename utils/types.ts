@@ -14,15 +14,27 @@ export type TableState = {
   rows: Row[];
 }
 
-export type Direction = 'vertical' | 'horizontal' | 'diagonal1' | 'diagonal2';
+// export type Direction = 'vertical' | 'horizontal' | 'diagonal1' | 'diagonal2';
+
+// export type GameStatus = {
+//   won: true;
+//   winner: User;
+//   cells: Cell[];
+//   direction: Direction;
+// } | {
+//   won: false;
+// }
 
 export type GameStatus = {
-  won: true;
+  status: 'logged-out';
+} | {
+  status: 'logged-in';
+} | {
+  status: 'playing';
+} | {
+  status: 'won';
   winner: User;
   cells: Cell[];
-  direction: Direction;
-} | {
-  won: false;
 }
 
 export type CheckStatus = {

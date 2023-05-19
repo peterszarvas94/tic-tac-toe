@@ -10,23 +10,23 @@ interface Props {
 
 export default function TableCell({ row, col }: Props) {
 
-  const { tableState, setTableState, user, setUser, winStatus, setWinStatus } = useContext(AppContext);
+  const { tableState, setTableState, user, setUser, game, setGame } = useContext(AppContext);
   const [hovered, setHovered] = useState(false);
 
   const rowState = tableState.rows[row];
   if (!rowState) return <td />;
 
   const cellState = rowState.cells[col];
-  const hoveredCell = hovered && !cellState.state && !winStatus.won;
+  const hoveredCell = hovered && !cellState.state && game.status === "playing";
   const state = cellState.state ?? null;
 
   const wonStyle =
-    (winStatus.won && winStatus.cells.some(cell => cell.row === row && cell.col === col)) ?
+    (game.status === "won" && game.cells.some(cell => cell.row === row && cell.col === col)) ?
       "bg-primary text-white" :
       "";
 
   const hoverStyle =
-    (!winStatus.won && !state) ?
+    (game.status === "playing" && !state) ?
       "hover:bg-accent hover:text-white" :
       "";
 
@@ -42,7 +42,7 @@ export default function TableCell({ row, col }: Props) {
       }}
       onClick={() => {
         if (state !== null) return;
-        if (winStatus.won) return;
+        if (game.status === "won") return;
 
         const newCell: Cell = {
           row,
@@ -57,8 +57,8 @@ export default function TableCell({ row, col }: Props) {
         setUser(user === "X" ? "O" : "X");
 
         const check = checkWin(newTableState, row, col, user);
-        if (check && check.won) {
-          setWinStatus(check);
+        if (check && check.status === "won") {
+          setGame(check);
         }
       }}
     >

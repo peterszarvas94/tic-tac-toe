@@ -3,12 +3,12 @@ import { AppContext } from "./AppContext";
 
 export default function Staus() {
 
-  const { user, winStatus } = useContext(AppContext);
+  const { user, game } = useContext(AppContext);
 
   return (
     <div className="text-2xl">
-      {winStatus.won ? (
-        `${winStatus.winner} won!`
+      {game.status === "won" ? (
+        `${game.winner} won!`
       ) : (
         `Next Player: ${user}`
       )}
