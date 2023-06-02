@@ -8,7 +8,7 @@ export default function Game() {
   const { setGame } = useContext(AppContext);
 
   return (
-    <div className="w-fit mx-auto flex flex-col gap-8 items-center">
+    <div className="w-fit mx-auto flex flex-col gap-2 items-center pt-4">
       <Table />
       <Status />
       <button

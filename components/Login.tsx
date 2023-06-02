@@ -25,29 +25,33 @@ export default function Login() {
   }
 
   return (
-    <form onSubmit={(e) => submitForm(e)} className="flex flex-col gap-2 items-center">
-      <input
-        type="text"
-        placeholder="admin"
-        name="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="bg-white py-2 px-4 border border-primary rounded-xl placeholder-accent focus:outline-primary text-xl"
-      />
-      <input
-        type="password"
-        placeholder="admin"
-        name="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="bg-white py-2 px-4 border border-primary rounded-xl placeholder-accent focus:outline-primary text-xl"
-      />
-      <button
-        type="submit"
-        className="bg-secondary border border-primary rounded-xl py-2 px-4 w-fit text-xl focus:outline-primary"
-      >
-        Login
-      </button>
-    </form>
+    <>
+      <h1 className="text-4xl mx-auto w-fit py-12">Big-Tac-Toe (Amoeba)</h1>
+
+      <form onSubmit={(e) => submitForm(e)} className="flex flex-col gap-2 items-center">
+        <input
+          type="text"
+          placeholder="admin"
+          name="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="bg-white py-2 px-4 border border-primary rounded-xl placeholder-accent focus:outline-primary text-xl"
+        />
+        <input
+          type="password"
+          placeholder="admin"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="bg-white py-2 px-4 border border-primary rounded-xl placeholder-accent focus:outline-primary text-xl"
+        />
+        <button
+          type="submit"
+          className="bg-secondary border border-primary rounded-xl py-2 px-4 w-fit text-xl focus:outline-primary"
+        >
+          Login
+        </button>
+      </form>
+    </>
   );
 }

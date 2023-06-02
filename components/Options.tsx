@@ -106,102 +106,106 @@ export default function Options() {
 
 
   return (
-    <form className="flex flex-col gap-10 w-fit mx-auto" onSubmit={(e) => formSubmit(e)}>
+    <>
+      <h1 className="text-4xl mx-auto w-fit py-12">Big-Tac-Toe (Amoeba)</h1>
 
-      {/* Table size */}
-      <div className="flex gap-4 items-center">
-        <label htmlFor="table-size" className="grow">Table size:</label>
-        <select
-          name="table-size"
-          value={size}
-          onChange={(e) => setSize(parseInt(e.target.value) as TableSize)}
-          className="
+      <form className="flex flex-col gap-8 w-fit mx-auto" onSubmit={(e) => formSubmit(e)}>
+
+        {/* Table size */}
+        <div className="flex gap-4 items-center">
+          <label htmlFor="table-size" className="grow">Table size:</label>
+          <select
+            name="table-size"
+            value={size}
+            onChange={(e) => setSize(parseInt(e.target.value) as TableSize)}
+            className="
             border border-primary rounded-xl p-1 bg-secondary cursor-pointer text-center focus:outline-primary
           "
-        >
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
-      </div>
+          >
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
 
-      {/* Pieces to win */}
-      <div className="flex gap-4 items-center">
-        <label htmlFor="pieces-to-win" className="grow">Pieces to win:</label>
-        <select
-          name="pieces-to-win"
-          value={piecesToWin}
-          onChange={(e) => setPiecesToWin(parseInt(e.target.value) as PieceSize)}
-          className="
+        {/* Pieces to win */}
+        <div className="flex gap-4 items-center">
+          <label htmlFor="pieces-to-win" className="grow">Pieces to win:</label>
+          <select
+            name="pieces-to-win"
+            value={piecesToWin}
+            onChange={(e) => setPiecesToWin(parseInt(e.target.value) as PieceSize)}
+            className="
             border border-primary rounded-xl p-1 bg-secondary cursor-pointer text-center focus:outline-primary
           "
-        >
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </div>
+          >
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
 
-      {/* Players */}
-      <div className="flex flex-col gap-2 items-center">
-        <div className="flex gap-2 w-full items-center">
-          <label className="grow">Players:</label>
-          <div className="flex gap-2">
-            <button
-              className={`
+        {/* Players */}
+        <div className="flex flex-col gap-2 items-center">
+          <div className="flex gap-2 w-full items-center">
+            <label className="grow">Players:</label>
+            <div className="flex gap-2">
+              <button
+                className={`
                 border w-12 h-12 rounded-xl flex items-center justify-center bg-secondary focus:outline-primary
                 ${players.length <= 2 ? "text-accent border-accent" : "text-black border-primary"}
               `}
-              disabled={players.length <= 2}
-              onClick={(e) => {
-                e.preventDefault();
-                if (players.length > 2) {
-                  setPlayers(players.slice(0, -1));
-                }
-              }}
-            >
-              -
-            </button>
-            <button
-              className={`
+                disabled={players.length <= 2}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (players.length > 2) {
+                    setPlayers(players.slice(0, -1));
+                  }
+                }}
+              >
+                -
+              </button>
+              <button
+                className={`
                 border w-12 h-12 rounded-xl flex items-center justify-center bg-secondary focus:outline-primary
                 ${players.length >= 4 ? "text-accent border-accent" : "text-black border-primary"}
               `}
-              disabled={players.length >= 4}
-              onClick={(e) => {
-                e.preventDefault();
-                if (players.length < 4) {
-                  const last = players.at(-1);
-                  if (!last) return;
-                  const id = last.id + 1;
-                  const symbol = nextSymbol(UserList, players);
-                  setPlayers([...players, { id, name: "", symbol }]);
-                }
-              }}
-            >
-              +
-            </button>
+                disabled={players.length >= 4}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (players.length < 4) {
+                    const last = players.at(-1);
+                    if (!last) return;
+                    const id = last.id + 1;
+                    const symbol = nextSymbol(UserList, players);
+                    setPlayers([...players, { id, name: "", symbol }]);
+                  }
+                }}
+              >
+                +
+              </button>
 
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            {renderPlayerFields()}
           </div>
         </div>
-        <div className="flex flex-col gap-2">
-          {renderPlayerFields()}
-        </div>
-      </div>
 
 
-      <div className="flex justify-center">
-        <button
-          type="submit"
-          className="
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="
             border border-primary py-2 px-4 w-fit rounded-xl flex items-center bg-secondary focus:outline-primary text-xl
           "
-        >
-          start game
-        </button>
-      </div>
-    </form>
+          >
+            start game
+          </button>
+        </div>
+      </form>
+    </>
   );
 }
