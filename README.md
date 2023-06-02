@@ -15,7 +15,20 @@ npm run start
 
 Go to `localhost:3000` or any other address the terminal shows
 
-The username and password are both `admin`
+## How to play
+
+- Log in, the username and password are both `admin`
+- Select table size (default is 10x10)
+- Select how many pieces you need to win (default is 5)
+- Select how many players will play with the `+` and `-` buttons
+- Type player names and select their symbol
+- Enjoy 😊
+
+## About the app:
+
+- Next.js for easy developement and deploying
+- TypeScript for type-safe code
+- Tailwind CSS for easy styling
 
 ## Live version
 
