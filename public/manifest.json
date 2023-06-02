@@ -1,0 +1,17 @@
+{
+  "name": "Big-Tac-Toe (Amoeba)",
+  "short_name": "Big-Tac-Toe",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "icons": [
+    {
+      "src": "/next.svg",
+      "type": "image/svg"
+    }
+  ],
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}
