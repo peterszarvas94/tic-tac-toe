@@ -49,7 +49,7 @@ export default function Login() {
           type="submit"
           className="bg-secondary border border-primary rounded-xl py-2 px-4 w-fit text-xl focus:outline-primary"
         >
-          Login
+          login
         </button>
       </form>
     </>
