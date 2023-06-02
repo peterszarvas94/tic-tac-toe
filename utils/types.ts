@@ -1,11 +1,10 @@
-export type User = "O" | "X" | "=";
-
-export const UserList: User[] = ["O", "X", "="];
+export type Symbol = "O" | "X" | "=" | "+" | "*" | "#";
+export const UserList: Symbol[] = ["O", "X", "=", "+", "*", "#"];
 
 export type Cell = {
   row: number;
   col: number;
-  state: User | null;
+  state: Symbol | null;
 }
 
 export type Row = {
@@ -24,7 +23,7 @@ export type GameStatus = {
   status: 'playing';
 } | {
   status: 'won';
-  winner: User;
+  winner: Symbol;
   cells: Cell[];
 }
 
@@ -36,4 +35,11 @@ export type CheckStatus = {
 }
 
 export type TableSize = 5 | 6 | 7 | 8 | 9 | 10;
-export type PlayersSize = 2 | 3;
+export type PlayersSize = 2 | 3 | 4;
+export type PieceSize = 3 | 4 | 5;
+
+export type Player = {
+  id: number;
+  name: string;
+  symbol: Symbol;
+}

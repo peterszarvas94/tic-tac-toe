@@ -1,44 +1,46 @@
-import { useContext } from "react";
-import { useForm } from "react-hook-form";
+import { FormEvent, useContext, useState } from "react";
 import { AppContext } from "@/components/AppContext";
-
-type Form = {
-  username: string;
-  password: string;
-};
+import { toast } from "react-hot-toast";
 
 export default function Login() {
 
   const { setGame } = useContext(AppContext);
-  const { register, handleSubmit, formState: { errors }, setError } = useForm<Form>();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  function formSubmit(data: Form) {
-    const { username, password } = data;
+  function submitForm(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (username === "" || password === "") {
+      toast.error("Username or password is missing", { className: "text-xl" });
+      return;
+    }
+
     if (username !== "admin" || password !== "admin") {
-      setError("root", { message: "Invalid username or password" });
+      toast.error("Invalid credentials", { className: "text-xl" });
       return;
     }
 
     setGame({ status: "logged-in" });
   }
 
-  function clearError() {
-    setError("root", { message: "" });
-  }
-
   return (
-    <form onSubmit={handleSubmit(formSubmit)} onChange={() => clearError()} className="flex flex-col gap-2 items-center">
+    <form onSubmit={(e) => submitForm(e)} className="flex flex-col gap-2 items-center">
       <input
-        {...register("username", { required: true })}
         type="text"
         placeholder="admin"
-        className="bg-white py-2 px-4 border border-primary rounded-xl placeholder-accent focus:outline-primary"
+        name="username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        className="bg-white py-2 px-4 border border-primary rounded-xl placeholder-accent focus:outline-primary text-xl"
       />
       <input
-        {...register("password", { required: true })}
         type="password"
         placeholder="admin"
-        className="bg-white py-2 px-4 border border-primary rounded-xl placeholder-accent focus:outline-primary"
+        name="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="bg-white py-2 px-4 border border-primary rounded-xl placeholder-accent focus:outline-primary text-xl"
       />
       <button
         type="submit"
@@ -46,14 +48,6 @@ export default function Login() {
       >
         Login
       </button>
-
-      {errors.username || errors.password ? (
-        <p className="text-red-500 text-xl">Please fill out the form</p>
-      ) : null}
-
-      {errors.root ? (
-        <p className="text-red-500 text-xl">{errors.root.message}</p>
-      ) : null}
     </form>
   );
 }

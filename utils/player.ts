@@ -1,13 +1,14 @@
-import { PlayersSize, User } from "@/utils/types";
-import { UserList } from "@/utils/types";
+import { Player, Symbol } from "@/utils/types";
 
-export function nextPlayer(users: User[], current: User): User {
-  const index = users.indexOf(current);
-  const nextIndex = (index + 1) % users.length;
-  return users[nextIndex];
+export function nextPlayer(players: Player[], current: Player): Player {
+  const index = players.findIndex((player) => player === current);
+  const nextIndex = (index + 1) % players.length;
+  return players[nextIndex];
 }
 
-export function generatePlayerList(count: PlayersSize): User[] {
-  const players = UserList.slice(0, count);
-  return players;
+export function nextSymbol(symbols: Symbol[], players: Player[]): Symbol {
+  const nextFreeSymbol = symbols.find((symbol) => {
+    return !players.some((player) => player.symbol === symbol);
+  });
+  return nextFreeSymbol || "O";
 }

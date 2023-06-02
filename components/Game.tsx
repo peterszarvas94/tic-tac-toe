@@ -13,7 +13,7 @@ export default function Game() {
       <Status />
       <button
         className="
-            text-2xl border border-primary py-2 px-4 rounded-xl flex items-center bg-secondary w-fit
+            border border-primary py-2 px-4 rounded-xl flex items-center bg-secondary w-fit text-xl
           "
         onClick={() => {
           setGame({ status: "logged-in" });

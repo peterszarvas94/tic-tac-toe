@@ -1,26 +1,32 @@
-import type { Cell, Row, GameStatus, TableState, User, CheckStatus } from "@/utils/types";
+import type { Cell, Row, GameStatus, TableState, Symbol, CheckStatus, PieceSize } from "@/utils/types";
 
-function checkDirection(direction: Row, user: User): CheckStatus {
+function checkDirection(direction: Row, player: Symbol, piecesToWin: PieceSize): CheckStatus {
   const { cells } = direction;
   let winnerCells: Cell[] = [];
+
   for (let i = 0; i < cells.length; i++) {
     const cell = cells[i];
-    if (cell.state !== user) {
+    if (cell.state !== player) {
+      if (winnerCells.length >= piecesToWin) {
+        return { won: true, cells: winnerCells };
+      }
       winnerCells = [];
       continue;
     }
-    if (cell.state === user) {
+    if (cell.state === player) {
       winnerCells.push(cell);
     }
-    if (winnerCells.length === 5) {
-      return { won: true, cells: winnerCells };
-    }
   }
+
+  if (winnerCells.length >= piecesToWin) {
+    return { won: true, cells: winnerCells };
+  }
+
   return { won: false };
 }
 
-export function checkWin(table: TableState, row: number, col: number, user: User): GameStatus {
-  if (!user) {
+export function checkWin(table: TableState, row: number, col: number, player: Symbol, piecesToWin: PieceSize): GameStatus {
+  if (!player) {
     return { status: 'playing' }
   }
 
@@ -40,10 +46,10 @@ export function checkWin(table: TableState, row: number, col: number, user: User
     vertical.cells.push(currentCell);
   }
 
-  const checkVertical = checkDirection(vertical, user)
+  const checkVertical = checkDirection(vertical, player, piecesToWin)
   if (checkVertical.won) {
 
-    return { status: 'won', winner: user, cells: checkVertical.cells };
+    return { status: 'won', winner: player, cells: checkVertical.cells };
   }
 
   // collect all cells in the same column
@@ -54,9 +60,9 @@ export function checkWin(table: TableState, row: number, col: number, user: User
   if (tableRow) {
     horizontal.cells = tableRow.cells;
   }
-  const checkHorizontal = checkDirection(horizontal, user);
+  const checkHorizontal = checkDirection(horizontal, player, piecesToWin);
   if (checkHorizontal.won) {
-    return { status: 'won', winner: user, cells: checkHorizontal.cells };
+    return { status: 'won', winner: player, cells: checkHorizontal.cells };
   }
 
   // collect all cells in the same diagonal, top-left to bottom-right
@@ -94,9 +100,9 @@ export function checkWin(table: TableState, row: number, col: number, user: User
     i++;
     j++;
   }
-  const checkDiagonal1 = checkDirection(diagonal1, user);
+  const checkDiagonal1 = checkDirection(diagonal1, player, piecesToWin);
   if (checkDiagonal1.won) {
-    return { status: 'won', winner: user, cells: checkDiagonal1.cells };
+    return { status: 'won', winner: player, cells: checkDiagonal1.cells };
   }
 
   // collect all cells in the same diagonal, top-right to bottom-left
@@ -133,9 +139,9 @@ export function checkWin(table: TableState, row: number, col: number, user: User
     k++;
     l--;
   }
-  const checkDiagonal2 = checkDirection(diagonal2, user);
+  const checkDiagonal2 = checkDirection(diagonal2, player, piecesToWin);
   if (checkDiagonal2.won) {
-    return { status: 'won', winner: user, cells: checkDiagonal2.cells };
+    return { status: 'won', winner: player, cells: checkDiagonal2.cells };
   }
 
   return { status: 'playing' };

@@ -3,38 +3,34 @@ import { AppContext } from "@/components/AppContext";
 
 export default function Staus() {
 
-  const { user, game, players } = useContext(AppContext);
+  const { current, players } = useContext(AppContext);
 
-  if (game.status === "won") {
-    return (
-      <div className="text-2xl flex gap-4 items-center">
-        <div>winner:</div>
-        <div className="flex w-10 h-10 items-center justify-center rounded-lg bg-primary text-white">{game.winner}</div>
-      </div>
-    )
-  }
-
-  let symbols: ReactNode[] = [];
+  let playerList: ReactNode[] = [];
   for (let i = 0; i < players.length; i++) {
     const player = players[i];
-    symbols.push(
-      <div
-        className={`
-          flex w-10 h-10 items-center justify-center rounded-lg
-          ${player === user ? "bg-primary text-white" : ""}
-        `}
-        key={player}
+    playerList.push(
+      <li
+        key={player.id}
+        className="flex gap-4 items-center"
       >
-        {player}
-      </div>
+        <div
+          className={`
+          flex w-10 h-10 items-center justify-center rounded-lg 
+          ${(player.symbol === current.symbol) ? "bg-primary text-white" : ""}
+        `}
+        >{player.symbol}</div>
+        <div>{player.name}</div>
+      </li>
     )
   }
 
-
   return (
-    <div className="text-2xl flex gap-4 items-center">
-      <div>next player:</div>
-      <div className="flex gap-2 text-3xl">{symbols}</div>
+    <div>
+      <div className="flex gap-4 items-center">
+        <ul className="flex flex-col gap-2">
+          {playerList}
+        </ul>
+      </div>
     </div>
   )
 }

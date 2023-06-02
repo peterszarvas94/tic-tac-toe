@@ -3,6 +3,7 @@ import type { Cell, TableState } from "@/utils/types";
 import { AppContext } from "@/components/AppContext";
 import { checkWin } from "@/utils/checkWin";
 import { nextPlayer } from "@/utils/player";
+import { toast } from "react-hot-toast";
 
 interface Props {
   row: number;
@@ -11,7 +12,7 @@ interface Props {
 
 export default function TableCell({ row, col }: Props) {
 
-  const { tableState, setTableState, user, setUser, game, setGame, players } = useContext(AppContext);
+  const { tableState, setTableState, game, setGame, players, current, setCurrent, piecesToWin } = useContext(AppContext);
   const [hovered, setHovered] = useState(false);
 
   const rowState = tableState.rows[row];
@@ -48,24 +49,27 @@ export default function TableCell({ row, col }: Props) {
         const newCell: Cell = {
           row,
           col,
-          state: user,
+          state: current.symbol,
         }
 
         const newTableState: TableState = { ...tableState };
         newTableState.rows[row].cells[col] = newCell;
 
         setTableState(newTableState);
-        const next = nextPlayer(players, user);
-        setUser(next);
 
-        const check = checkWin(newTableState, row, col, user);
+        const check = checkWin(newTableState, row, col, current.symbol, piecesToWin);
         if (check && check.status === "won") {
           setGame(check);
+          toast.success(`${current.name} won!`, { className: "text-xl" });
+          return;
         }
+
+        const next = nextPlayer(players, current);
+        setCurrent(next);
       }}
     >
       <div className="w-full h-full flex items-center justify-center">
-        {hoveredCell ? user : state}
+        {hoveredCell ? current.symbol : state}
       </div>
     </td>
   );
